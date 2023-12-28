@@ -74,11 +74,13 @@ int main(int argc, char *argv[])
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				if (FD_ISSET(fpipes[i], &read_watch))
+				if ( fpipes[i] > 0 && FD_ISSET(fpipes[i], &read_watch))
 					res += read_num(&fpipes[i]);
 			}
 		}
 	}
 	printf("%d\n",res);
+	close(fpipes[0]);
+	close(fpipes[1]);
 	return 0;
 }
