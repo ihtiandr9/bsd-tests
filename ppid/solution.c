@@ -12,18 +12,21 @@ int main(int argc, char *argv[])
 	int pid = getpid();	
 	//printf("pid = %d", pid);
 	int ppid = getppid();
-	FILE *fd = fopen("/proc/self/stat", "ro");
+	int fd = open("/proc/curproc/status", O_RDONLY);
 	if (!fd)
 	{
 		printf("file not found");
 		exit(-1);
 	}
 
-	fgets(buf, 512,fd);
+	read(fd, buf, 512);
 	instr = strtok(buf, " ");
 	instr = strtok(0, " ");
 	instr = strtok(0, " ");
 	instr = strtok(0, " ");
+	instr = strtok(0, " ");
 	printf("%s\n", instr);
+	printf("with cmd: %s\n", buf);
+	read(0, buf, 5);
 	return 0;
 }
