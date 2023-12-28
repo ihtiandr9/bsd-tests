@@ -8,8 +8,8 @@
 
 void hSigterm(int signo)
 {
-printf("signal %d recieved", signo);
-return;
+if (SIGURG == signo)
+	raise(9);
 }
 
 int main(int argc, char *argv[])
@@ -21,11 +21,11 @@ int main(int argc, char *argv[])
 	}
 	else{
 		setsid();
-		signal(SIGTERM, hSigterm);
+		signal(SIGURG, hSigterm);
 		fclose(stdin);
 		fclose(stderr);
 		while(1)
-		sleep(20);
+		sleep(2000000);
 	}
 	
 	return 0;
