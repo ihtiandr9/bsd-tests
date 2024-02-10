@@ -8,21 +8,20 @@
 
 int main(int argc, char *argv[])
 {
-    int pid = fork();
-    if (pid)
-    {
-        printf("%d\n", pid);
-    }
-    else
-    {
-        setsid();
-        fclose(stdout);
-        fclose(stdin);
-        fclose(stderr);
-        while (1)
-            sleep(20);
-    }
+	int pid = fork();
+	if (pid)
+	{
+		printf("%d\n", pid);
+	}
+	else
+	{
+		setsid();
+		fclose(stdout);
+		fclose(stdin);
+		fclose(stderr);
+		while (1)
+			sleep(20);
+	}
 
-    return 0;
+	return 0;
 }
-
